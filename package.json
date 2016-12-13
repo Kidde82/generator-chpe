@@ -1,0 +1,18 @@
+{
+  "name": "generator-chpe",
+  "version": "1.0.0",
+  "description": "A generator for my personal purpouse",
+  "main": "index.js",
+  "files": [
+    "generators/app",
+    "generators/angular2"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christian Persson <kidde82@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "yeoman-generator": "^0.24.1"
+  }
+}
