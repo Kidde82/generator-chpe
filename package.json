@@ -13,6 +13,7 @@
   "author": "Christian Persson <kidde82@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.2",
     "yeoman-generator": "^0.24.1"
   }
 }

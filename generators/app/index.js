@@ -9,6 +9,11 @@ module.exports = generators.Base.extend({
 		this.helperMethod = function () {
 			this.log('won\'t be called automatically');
 		};
+
+		installNpmPackages = function () {
+			this.log("installnpm");
+			this.npmInstall(["lodash"], { "save": true })
+		}
 	},
 
 	initializing: function() {
@@ -80,9 +85,5 @@ module.exports = generators.Base.extend({
 		this.log('method 1 just ran');
 		this.helperMethod();
 	},
-
-	installNpmPackages: function() {
-		this.npmInstall(["lodash"], { "save": true })
-	}
 
 });
