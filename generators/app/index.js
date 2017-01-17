@@ -18,12 +18,11 @@ module.exports = generators.Base.extend({
 
 	initializing: function() {
 		this.log("Initializing");
-		this.composeWith("chpe:angular2");
 		this.log(this.config.getAll());
 	},
 
 	prompting: function() {
-		this.log("prompting ");
+		this.log("prompting it");
 		return this.prompt([{
 				type	: "input",
 				name	: "name",
@@ -46,6 +45,13 @@ module.exports = generators.Base.extend({
 					"name": answers.name,
 					"generator": answers.generator
 				})
+				if (answers.generator === "Angular2") {
+					this.composeWith("chpe:angular2", {
+						options: {
+							name: this.config.get("name"),
+						}
+					});
+				}
 			}.bind(this));
 	},
 
@@ -58,14 +64,7 @@ module.exports = generators.Base.extend({
 	},
 
 	writing: function() {
-		var generator = this.config.get("generator");
-
 		this.log("writing");
-		this.fs.copyTpl(
-			this.templatePath("index.html"),
-			this.destinationPath("app/index.html"),
-			{ title: "Templating with Yeoman" }
-		);
 	},
 
 	conflicts: function() {
