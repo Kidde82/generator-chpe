@@ -26,6 +26,16 @@ String.prototype.kebab = function () {
 	return _.kebabCase(this);
 };
 
+// Result: hello_world
+String.prototype.snake = function () {
+	return _.snakeCase(this);
+}
+
+// Result: HELLO_WORLD
+String.prototype.uppersnake = function () {
+	return _.toUpper(_.snakeCase(this));
+}
+
 // Result: Hello world
 String.prototype.sentence = function () {
 	return _.upperFirst(this.kebab().split("-").join(" "));

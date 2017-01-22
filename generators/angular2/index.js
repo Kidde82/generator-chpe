@@ -19,8 +19,9 @@ module.exports = generators.Base.extend({
 				name	: "kind",
 				message	: "What to generate",
 				choices	: [
-					"Module",
 					"Component",
+					"Redux",
+					"Module",
 					"Service",
 					"Test"
 				]
@@ -51,12 +52,13 @@ module.exports = generators.Base.extend({
 		this.log("writing ng2");
 		var kind = this.config.get("kind");
 		var selector = this.config.get("selectorPrefix") + "-" + this.options.name.kebab();
+		var destinationRoot = "./src/app/";
+		var destinationE2eRoot = "./src/e2e/specs/";
 
 		if (kind === "Module") {
-			var destination = "./src/client/app/" + this.options.name.kebab();
+			var destination = destinationRoot + this.options.name.kebab();
 			var destinationFilename = destination + "/" + this.options.name.kebab();
-			var destinationE2e = "./src/e2e/specs/";
-			var destinationFilenameE2e = destinationE2e + this.op.name.kebab();
+			var destinationFilenameE2e = destinationE2eRoot + this.op.name.kebab();
 
 			this.fs.copyTpl(
 				this.templatePath("module/_index.ts"),
@@ -111,7 +113,7 @@ module.exports = generators.Base.extend({
 				}
 			);
 		} else if (kind === "Component") {
-			var destination = "./src/client/app/shared/" + this.options.name.kebab();
+			var destination = destinationRoot + "shared/" + this.options.name.kebab();
 			var destinationFilename = destination + "/" + this.options.name.kebab();
 
 			this.fs.copyTpl(
@@ -146,7 +148,7 @@ module.exports = generators.Base.extend({
 				}
 			);
 		} else if (kind === "Service") {
-			var destination = "./src/client/app/shared/" + this.options.name.kebab();
+			var destination = destinationRoot + "shared/" + this.options.name.kebab();
 			var destinationFilename = destination + "/" + this.options.name.kebab();
 
 			this.fs.copyTpl(
@@ -164,6 +166,99 @@ module.exports = generators.Base.extend({
 			this.fs.copyTpl(
 				this.templatePath("service/_template.service.ts"),
 				this.destinationPath(destinationFilename + ".service.ts"),
+				{ name: this.options.name }
+			);
+		} else if (kind === "Redux") {
+			var destination = destinationRoot + "sdk/" + this.options.name.kebab();
+			var destinationFilename = destination + "/" + this.options.name.kebab();
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_index.ts"),
+				this.destinationPath(destination + "/index.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.action.ts"),
+				this.destinationPath(destinationFilename + ".action.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.client.ts"),
+				this.destinationPath(destinationFilename + ".client.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.config.ts"),
+				this.destinationPath(destinationFilename + ".config.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.const.ts"),
+				this.destinationPath(destinationFilename + ".const.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.effect.ts"),
+				this.destinationPath(destinationFilename + ".effect.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.model.ts"),
+				this.destinationPath(destinationFilename + ".model.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.reducer.spec.ts"),
+				this.destinationPath(destinationFilename + ".reducer.spec.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.reducer.ts"),
+				this.destinationPath(destinationFilename + ".reducer.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.selector.ts"),
+				this.destinationPath(destinationFilename + ".selector.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.service.ts"),
+				this.destinationPath(destinationFilename + ".service.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.service.spec.ts"),
+				this.destinationPath(destinationFilename + ".service.spec.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.spec.ts"),
+				this.destinationPath(destinationFilename + ".spec.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template.util.ts"),
+				this.destinationPath(destinationFilename + ".util.ts"),
+				{ name: this.options.name }
+			);
+
+			this.fs.copyTpl(
+				this.templatePath("redux/_template-list.reducer.ts"),
+				this.destinationPath(destinationFilename + "-list.reducer.ts"),
 				{ name: this.options.name }
 			);
 		}
